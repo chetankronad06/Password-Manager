@@ -9,8 +9,19 @@ const Manager = () => {
     const [form, setform] = useState({ site: '', username: '', password: '', id: '' })
     const [passwordArry, setpasswordArry] = useState([])
     const showPassword = () => {
+        if (form.password.length === 0){
+            toast.error("Error: Enter password ❌", {  // Use `toast.error` for error styling
+                position: "bottom-right",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "dark",  // Dark theme for error styling
+            });
+            return;
+        }
         if (ref.current.src.includes('eye.png')) {
-
             passwordRef.current.type = 'text'
             ref.current.src = 'eyecross.png'
         } else {
@@ -153,9 +164,9 @@ const Manager = () => {
                     </button>
                 </div>
 
-                <div className="passwords">
+                <div className="passwords ">
                     <h2 className='font-bold text-2xl py-4 '>Your Passwords</h2>
-                    {passwordArry.length === 0 && <div> No passwords to show</div>}
+                    {passwordArry.length === 0 && <div className='text-center'> No passwords to show</div>}
                     {passwordArry.length != 0 &&
                         <table className="table-auto w-full rounded-md overflow-hidden mb-10">
                             <thead className='bg-green-800 text-white'>
